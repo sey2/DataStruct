@@ -35,24 +35,24 @@ void set_union(int a, int b) {
 }
 
 struct Edge {	/// 간선을 나타내는 구조체
-	int start, end, weight; 
+	int start, end, weight;
 };
 
 typedef struct GraphType {
 	int n;
-	struct Edge edges[2 * MAX_VERTICCES];  /// 간선의 수 -> 2e
+	struct Edge edges[2 * MAX_VERTICES];  /// 간선의 수 -> 2e
 }GraphType;
 
 void graph_init(GraphType* g) {
 	g->n = 0;
-	for (int i = 0; i < 2 * MAX_VERTICCES; i++) {
+	for (int i = 0; i < 2 * MAX_VERTICES; i++) {
 		g->edges[i].start = 0;
 		g->edges[i].end = 0;
 		g->edges[i].weight = 0;
 	}
 }
 
-void insert_edge(GraphType* g, int start, int end. int w) {
+void insert_edge(GraphType* g, int start, int end, int w) {
 	g->edges[g->n].start = start;
 	g->edges[g->n].end = end;
 	g->edges[g->n].weight = w;
@@ -83,7 +83,7 @@ void kruskal(GraphType* g) {
 		vset = set_find(e.end);
 
 		if (uset != vset) {	    /// 서로 속한 집합이 다르다면
-			printf("간선 (%d,%d) %d선택 \n", e.start, e.end, e, weight);
+			printf("간선 (%d,%d) %d선택 \n", e.start, e.end, e.weight);
 			edge_accepted++;
 			set_union(uset, vset);		/// 두개의 집합을 합친다
 		}
@@ -104,5 +104,9 @@ int main(void) {
 	insert_edge(g, 6, 1, 15);
 	insert_edge(g, 6, 3, 18);
 	insert_edge(g, 6, 4, 25);
+
+	kruskal(g);
+	free(g);
+	return 0;
 
 }
