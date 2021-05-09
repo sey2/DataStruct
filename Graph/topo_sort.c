@@ -47,7 +47,7 @@ void insert_edge(GraphType* g, int u, int v) {
 #define MAX_STACK_SIZE 100
 typedef int element;
 
-typedef struct{
+typedef struct {
 	element stack[MAX_STACK_SIZE];
 	int top;
 }StackType;
@@ -64,7 +64,7 @@ int is_full(StackType* s) {
 	return (s->top == (MAX_STACK_SIZE - 1));
 }
 
-void push(StackType* s,element item) {
+void push(StackType* s, element item) {
 	if (is_full(s)) {
 		fprintf(stderr, "스택 포화\n");
 		return;
@@ -77,7 +77,8 @@ element pop(StackType* s) {
 	if (is_empty(s)) {
 		fprintf(stderr, "스택 공백에러\n");
 		return;
-	}else return s->stack[(s->top)--];
+	}
+	else return s->stack[(s->top)--];
 }
 
 int topo_sort(GraphType* g) {
@@ -86,10 +87,10 @@ int topo_sort(GraphType* g) {
 	GraphNode* node;
 
 	int* in_degree = (int*)malloc(g->n * sizeof(int));
-	
+
 	for (i = 0; i < g->n; i++)
 		in_degree[i] = 0;
-	
+
 	for (i = 0; i < g->n; i++) {
 		GraphNode* node = g->adj_list[i];
 		while (node != NULL) {
@@ -126,10 +127,10 @@ int main(void) {
 	GraphType g;
 
 	graph_init(&g);
-	
+
 	for (int i = 0; i < 6; i++)
 		insert_vertex(&g);
-	
+
 
 	insert_edge(&g, 0, 2);
 	insert_edge(&g, 0, 3);
@@ -144,7 +145,7 @@ int main(void) {
 	insert_edge(&g, 4, 5);
 
 	topo_sort(&g);
-	
+
 	return 0;
 
 }
