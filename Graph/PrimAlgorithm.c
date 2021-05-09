@@ -17,8 +17,8 @@ int distance[MAX_VERTICES];
 
 int get_min_vertex(int n) {
 	int v, i;
-	for (i = 0; i < n; i++) 
-		if (!selected[i]){
+	for (i = 0; i < n; i++)
+		if (!selected[i]) {
 			v = i;
 			break;
 		}
@@ -31,7 +31,7 @@ int get_min_vertex(int n) {
 void prim(GraphType* g, int s) {
 	int i, u, v;
 
-	for (u = 0; u < g->n; u++) 
+	for (u = 0; u < g->n; u++)
 		distance[u] = INF;
 
 	distance[s] = 0;
@@ -46,12 +46,12 @@ void prim(GraphType* g, int s) {
 				if (!selected[v] && g->weight[u][v] < distance[v])
 					distance[v] = g->weight[u][v];
 	}
-	
+
 }
 
 int main(void) {
 	GraphType g = { 7,
-		{{0,29,INF,INF,10,INF},
+		{{0,29,INF,INF,INF,10,INF}, ///신장트리의 거리와 모양을 배열로 표현, INF는 바로갈 수 있는 경로가 없음을 뜻한다.
 		{29,0,16,INF,INF,INF,15},
 		{INF,16,0,12,INF,INF,INF},
 		{INF,INF,12,0,22,INF,18},
@@ -59,6 +59,6 @@ int main(void) {
 		{10,INF,INF,INF,27,0,INF},
 		{INF,15,INF,18,25,INF,0} }
 	};
-	prime(&g, 0);
+	prim(&g, 0);
 	return 0;
 }
