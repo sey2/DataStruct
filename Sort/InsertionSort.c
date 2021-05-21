@@ -7,6 +7,7 @@
 int list[MAX_SIZE];
 int n;
 
+/// O(n^)
 void insertion_sort(int list[], int n) {
 	int i, j, key;
 	for (i = 1; i < n; i++) {
