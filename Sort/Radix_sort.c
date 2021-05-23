@@ -40,7 +40,7 @@ element dequeue(QueueType* q) {
 }
 
 #define BUCKETS 10
-#define DIGIT 4
+#define DIGIT 2
 
 /// O(n*d)
 void radix_sort(int list[], int n) {
