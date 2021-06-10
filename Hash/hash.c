@@ -83,12 +83,14 @@ void hash_qp_add(int item, element ht[]) {
 void hash_dh_add(int item, element ht[]) {
 	int i, hash_value, inc = 0;
 	i = hash_value = hash_function(item);
+	int step = 1;
 	inc = hash_function2(item);
 	while (ht[i] != 0) {
 		if (item == ht[i]) {
 			fprintf(stderr, "탐색키가 중복 되었습니다."); return;
 		}
-		i = (i + inc) % TABLE_SIZE;
+		i = (hash_value + (step*inc)) % TABLE_SIZE;
+		step++;
 	}
 	ht[i] = item;
 
