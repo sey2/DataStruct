@@ -21,6 +21,10 @@ int hash_function(int key) {
 	return key % TABLE_SIZE;
 }
 
+int hash_function2(int key2) {
+	return 7 - (key2 % 7);
+}
+/// 선형 조사법
 void hash_lp_add(int item, element ht[]) {
 	int i, hash_value;
 	hash_value = i = hash_function(item);
@@ -61,7 +65,7 @@ void hash_lp_print(element ht[]) {
 	printf("=============================================\n");
 	
 }
-
+/// 이차조사법
 void hash_qp_add(int item, element ht[]) {
 	int i, hash_value, inc = 0;
 	i = hash_value = hash_function(item);
@@ -73,13 +77,27 @@ void hash_qp_add(int item, element ht[]) {
 		inc = inc + 1;
 	}
 	ht[i] = item;
-	
+}
+
+/// 이중해싱
+void hash_dh_add(int item, element ht[]) {
+	int i, hash_value, inc = 0;
+	i = hash_value = hash_function(item);
+	inc = hash_function2(item);
+	while (ht[i] != 0) {
+		if (item == ht[i]) {
+			fprintf(stderr, "탐색키가 중복 되었습니다."); return;
+		}
+		i = (i + inc) % TABLE_SIZE;
+	}
+	ht[i] = item;
+
 }
 
 int main(void) {
 	int a[KEY_SIZE] = { 12, 44,13,88,23,94,11,39,20,16,5 };
 	for (int i = 0; i < 11; i++) {
-		hash_qp_add(a[i], hash);
+		hash_dh_add(a[i], hash);
 		hash_lp_print(hash);
 	}
 }
