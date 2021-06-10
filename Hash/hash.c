@@ -1,10 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 #define KEY_SIZE 10
 #define TABLE_SIZE 13
+
 
 typedef struct {
 	char key[KEY_SIZE];
@@ -37,8 +39,8 @@ void hash_lp_add(element item, element ht[]) {
 	int i, hash_value;
 	hash_value = i = hash_function;
 
-	while (!empty(ht[i])) {
-		if (equal(item, ht[i])) {
+	while (!(strlen(ht[i].key)==0) {
+		if (!(strcmp(item.key, ht[i].key)) {
 			fprintf(stderr, "탐색키가 중복되었습니다.\n");
 			exit(1);
 		}
@@ -54,8 +56,8 @@ void hash_lp_add(element item, element ht[]) {
 void hash_lp_search(element item, element ht[]) {
 	int i, hash_value;
 	hash_value = i = hash_function(item.key);
-	while (!empty(ht[i])) {
-		if (equal(item, ht[i])) {
+	while (!(strlen(ht[i].key)==0)) {
+		if ((!strcmp(item, ht[i]))) {
 			fprintf(stderr, "탐색 %s 위치 = %d\n", item.key, i);
 			return;
 		}
@@ -68,7 +70,7 @@ void hash_lp_search(element item, element ht[]) {
 	fprintf(stderr, "찾는 값이 테이블에 없음\n");
 }
 
-void hash_lp_printF(element ht[]) {
+void hash_lp_print(element ht[]) {
 	int i;
 	printf("\n======================================\n");
 	for (int i = 0; i < TABLE_SIZE; i++)
