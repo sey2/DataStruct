@@ -8,33 +8,31 @@ int list[MAX_SIZE];
 int n;
 
 void selection_sort(int list[], int n) {
-	int i, j, least, temp;
+	int least, temp;
 
-	/// O(n^)
-	for (i = 0; i < n - 1; i++) {
-		least = i;
+	for (int i = 0; i < n-1; i++) {
+		for (int j = i+1; j < n; j++) {
+			if (list[j] < list[i]) {
+				SWAP(list[i], list[j], temp);
+			}
 
-		for (j = i + 1; j < n; j++)
-			if (list[j] < list[least]) least = j;
-		if(i != least)
-			SWAP(list[i], list[least], temp);
-
+		}
 	}
 }
 
 int main(void) {
 	int i;
-	n = MAX_SIZE;
-	srand(time(NULL));
-
-	for (i = 0; i < n; i++)
+	int n = MAX_SIZE;
+	for (int i = 0; i < n; i++) 
 		list[i] = rand() % 100;
+
+	for (int i = 0; i < n; i++)
+		printf("%d ", list[i]);
+	printf("\n\n");
 
 	selection_sort(list, n);
 
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		printf("%d ", list[i]);
-
 	printf("\n");
-	return 0;
 }
